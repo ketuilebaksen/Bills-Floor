@@ -1,0 +1,109 @@
+BILLS FLOOR — KANAL KURULUMU
+=============================
+
+Takim: Buffalo Bills | Stadyum: Highmark Stadium
+Kadroda Josh Allen, James Cook, Khalil Shakir, DJ Moore, Dalton Kincaid,
+Ed Oliver, Greg Rousseau, Christian Benford.
+
+IKI DEGISIKLIK VAR, BILMEN LAZIM
+  - Bas antrenor artik Sean McDermott DEGIL. Ocak 2026'da gorevden alindi,
+    yerine hucum koordinatoru JOE BRADY gecti. Genel menajer Brandon Beane
+    yerinde.
+  - Highmark Stadium yeni bina, takimin orada ilk sezonu.
+
+Kadroya bu sezon gelenler: DJ Moore (Bears'tan takas), Bradley Chubb,
+C.J. Gardner-Johnson, Geno Stone. Gidenler: Joey Bosa, Matt Milano,
+Taron Johnson, Tre'Davious White.
+
+
+UZUNLUK AYARI — DIKKAT
+----------------------
+"Ayni sekilde" dedigin icin Vikings Floor ile birebir ayni ayarlarla
+kurdum, yani 25.000 karakterlik (~28 dakikalik) videolar icin:
+
+  body_cut          3.9    (diger NFL kanallarinda 3.4)
+  overlay_every_sec 30     (digerlerinde 25)
+  BROLL_SAMPLE      420    (digerlerinde 320)
+
+Bills icin kisa video (3-5 dakika, diger NFL kanallari gibi) istiyorsan
+channel.json'da iki degeri degistirmen yeter:
+
+  "body_cut": 3.4
+  "overlay_every_sec": 25
+
+BROLL_SAMPLE'i de 320'ye dusurmek istersen:
+Settings -> Secrets and variables -> Actions -> Variables -> New
+  Name: BROLL_SAMPLE   Value: 320
+
+Soyle, ben de duzeltilmis paketi gondereyim.
+
+STOK: 28 dakikalik video icin broll release'ine en az 500 klip koy.
+420'den az olursa sistem tekrara baslar.
+Kisa videoya gecersen 250 klip yeter.
+
+RENDER SURESI: 28 dakikalik video icin 75-100 dakika. Kisa videoda 3-5
+dakika. Is siniri 330 dakika, sorun degil.
+
+
+ADIM 1 — DEPO
+-------------
+Depo adi icin Bills-Floor oneriyorum.
+"Add a README" kutusunu ISARETLEME — isaretlersen push "unrelated
+histories" hatasi verir.
+
+Zaten README ile actiysan:
+  Repository -> Open in Command Prompt  (Ctrl + `)
+  git push --force origin main
+
+
+ADIM 2 — DOSYALARI KOPYALA
+--------------------------
+Bu zip'in icindekileri (OKU.txt haric) depo klasorune kopyala.
+
+Klasorde su kalmali:
+  .git  .github  assets  content  scripts  .gitignore  channel.json
+
+.github ve content Windows'ta gizli gorunebilir — "Hidden items" kutusunu ac.
+
+GitHub Desktop -> Summary: "ilk kurulum" -> Commit to main -> Push origin
+
+
+ADIM 3 — IZIN (sart)
+--------------------
+Settings -> Actions -> General -> en altta "Workflow permissions"
+"Read and write permissions" sec -> Save
+
+Bu olmadan video render edilir ama Release'e yuklenemez.
+
+
+ADIM 4 — STOK VIDEOLAR
+----------------------
+Releases -> Create a new release
+  Tag / Title : broll
+  Dosya       : Bills stok videolarini surukle
+  ---> "Publish release"   ("Save draft" e BASMA)
+
+Bir release'e 1000 dosya siginiyor, dolunca broll2 ac.
+Istege bagli:  music   ambient   photos
+
+music'e hem mp3 hem wav atabilirsin, sistem kopyalari birlestiriyor.
+
+
+ADIM 5 — ILK VIDEO
+------------------
+Ses otomasyonunda kanal listesine ekle, depo adi: Bills-Floor
+
+Render kaydinda goreceklerin:
+  STOK HAVUZU: ... klipten 420 tanesi bu video icin secildi
+  [assemble] sahne cesitliligi: ... farkli cekim ailesi
+  [assemble] music bed: ... parca, ... kez eklendi
+  [assemble] DONE -> work/final.mp4
+
+"b-roll: 0 clips" yaziyorsa broll release'i taslakta kalmis demektir.
+
+
+ISTEGE BAGLI — TEK OYUNCUYA OZEL HAVUZ
+--------------------------------------
+  Release tag : oyuncu-josh-allen   (ya da takim-buffalo-bills)
+  Icine en az 12 klip koy, Publish et.
+Metinde o isim en cok geciyorsa video sadece o havuzdan kurulur.
